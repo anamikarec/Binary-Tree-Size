@@ -74,6 +74,13 @@ class BinaryTree {
     this.sum(node.left);
     this.sum(node.right);
   }
+  depth(node = this.root) {
+    if (node == null) return -1;
+    let ltreeDepth = this.depth(node.left);
+    let rtreeDepth = this.depth(node.right);
+    if (ltreeDepth > rtreeDepth) return ltreeDepth + 1;
+    else return rtreeDepth + 1;
+  }
 }
 
 // creating a binary tree
@@ -84,7 +91,7 @@ tree.root.right = new Node(13);
 tree.root.left.left = new Node(4);
 tree.root.left.right = new Node(11);
 tree.root.right.left = new Node(6);
-tree.root.right.right = new Node(100);
+tree.root.right.right = new Node(-100);
 console.log("Size of the binary tree", tree.size());
 console.log("max element in a binary tree", tree.findMax());
 console.log("min element in a binary tree", tree.findmin());
@@ -96,3 +103,4 @@ tree.postorder();
 console.log("PostOrder traversal of binary tree", postOrderStr);
 tree.sum();
 console.log("Sum of the nodes in binary tree", sumVal);
+console.log("Depth of the tree", tree.depth());
