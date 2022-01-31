@@ -16,7 +16,7 @@ class BinaryTree {
     if (node == null) return 0;
     else return this.size(node.left) + 1 + this.size(node.right);
   }
-  // find maximum elemwnt in binary tree
+  // find maximum elemwnt in binary tree in O(n)
   findMax(node = this.root) {
     if (node == null) return Number.MIN_VALUE;
 
@@ -29,7 +29,7 @@ class BinaryTree {
     return max;
   }
 
-  // Find minimum element in the binary tree
+  // Find minimum element in the binary tree in O(n)
   findmin(node = this.root) {
     if (node == null) return Number.MAX_VALUE;
     let min = node.data;
