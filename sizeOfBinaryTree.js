@@ -49,11 +49,9 @@ class BinaryTree {
   // Postorder traversal => LRD
   preorder(node = this.root) {
     if (node == null) return null;
-    else {
-      preOrderStr += node.data + " ";
-      this.preorder(node.left);
-      this.preorder(node.right);
-    }
+    preOrderStr += node.data + " ";
+    this.preorder(node.left);
+    this.preorder(node.right);
   }
   // inorder traversal
   inOrder(node = this.root) {
