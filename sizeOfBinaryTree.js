@@ -3,6 +3,7 @@ let preOrderStr = "";
 let inOrderStr = "";
 let postOrderStr = "";
 let sumVal = 0;
+let height = 0;
 class Node {
   constructor(item) {
     this.data = item;
@@ -81,13 +82,32 @@ class BinaryTree {
     if (ltreeDepth > rtreeDepth) return ltreeDepth + 1;
     else return rtreeDepth + 1;
   }
+  // height of the paritcular node
+  heightOfTheNode(x, height, node = this.root) {
+    if (node === null) return 0;
+    if (node === x) return height;
+    let level = this.heightOfTheNode(x, height + 1, node.left);
+    if (level !== 0) return level;
+    return this.heightOfTheNode(x, height + 1, node.right);
+  }
+
+  // node exists or not
+  nodeExistOrNot(node = this.root, key) {
+    if (node === null) return false;
+    if (node.data === key) return true;
+    let checkLeftSubtree = this.nodeExistOrNot(node.left, key);
+    if (checkLeftSubtree) {
+      return true;
+    }
+    return this.nodeExistOrNot(node.right, key);
+  }
 }
 
 // creating a binary tree
 const tree = new BinaryTree();
 tree.root = new Node(1);
 tree.root.left = new Node(2);
-tree.root.right = new Node(13);
+let x = (tree.root.right = new Node(13));
 tree.root.left.left = new Node(4);
 tree.root.left.right = new Node(11);
 tree.root.right.left = new Node(6);
@@ -104,3 +124,11 @@ console.log("PostOrder traversal of binary tree", postOrderStr);
 tree.sum();
 console.log("Sum of the nodes in binary tree", sumVal);
 console.log("Depth of the tree", tree.depth());
+console.log(
+  "Height of the node",
+  x.data,
+  "is :~",
+  tree.heightOfTheNode(x, height)
+);
+
+console.log("if", "exist in binary tree : ", tree.nodeExistOrNot(tree, 101));
