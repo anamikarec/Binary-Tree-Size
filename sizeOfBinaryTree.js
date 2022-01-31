@@ -1,5 +1,7 @@
 // A program to calculate the size of binary tree
-
+let preOrderStr = "";
+let inOrderStr = "";
+let postOrderStr = "";
 class Node {
   constructor(item) {
     this.data = item;
@@ -41,6 +43,32 @@ class BinaryTree {
 
     return min;
   }
+  // Tree traversal methods
+  // preorder traversal => DLR
+  // INRODER Traversl => LDR
+  // Postorder traversal => LRD
+  preorder(node = this.root) {
+    if (node == null) return null;
+    else {
+      preOrderStr += node.data + " ";
+      this.preorder(node.left);
+      this.preorder(node.right);
+    }
+  }
+  // inorder traversal
+  inOrder(node = this.root) {
+    if (node == null) return null;
+    this.inOrder(node.left);
+    inOrderStr += node.data + " ";
+    this.inOrder(node.right);
+  }
+  //postorder
+  postorder(node = this.root) {
+    if (node == null) return null;
+    this.postorder(node.left);
+    this.postorder(node.right);
+    postOrderStr += node.data + " ";
+  }
 }
 
 // creating a binary tree
@@ -55,3 +83,9 @@ tree.root.right.right = new Node(-100);
 console.log("Size of the binary tree", tree.size());
 console.log("max element in a binary tree", tree.findMax());
 console.log("min element in a binary tree", tree.findmin());
+tree.preorder();
+console.log("PreOrder traversal of binary tree", preOrderStr);
+tree.inOrder();
+console.log("InOrder traversal of binary tree", inOrderStr);
+tree.postorder();
+console.log("PostOrder traversal of binary tree", postOrderStr);
