@@ -2,6 +2,7 @@
 let preOrderStr = "";
 let inOrderStr = "";
 let postOrderStr = "";
+let sumVal = 0;
 class Node {
   constructor(item) {
     this.data = item;
@@ -67,6 +68,12 @@ class BinaryTree {
     this.postorder(node.right);
     postOrderStr += node.data + " ";
   }
+  sum(node = this.root) {
+    if (node == null) return 0;
+    sumVal += node.data;
+    this.sum(node.left);
+    this.sum(node.right);
+  }
 }
 
 // creating a binary tree
@@ -77,7 +84,7 @@ tree.root.right = new Node(13);
 tree.root.left.left = new Node(4);
 tree.root.left.right = new Node(11);
 tree.root.right.left = new Node(6);
-tree.root.right.right = new Node(-100);
+tree.root.right.right = new Node(100);
 console.log("Size of the binary tree", tree.size());
 console.log("max element in a binary tree", tree.findMax());
 console.log("min element in a binary tree", tree.findmin());
@@ -87,3 +94,5 @@ tree.inOrder();
 console.log("InOrder traversal of binary tree", inOrderStr);
 tree.postorder();
 console.log("PostOrder traversal of binary tree", postOrderStr);
+tree.sum();
+console.log("Sum of the nodes in binary tree", sumVal);
